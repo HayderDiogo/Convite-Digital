@@ -1,0 +1,631 @@
+<title>Convite Digital Ana e Bruno</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+<style>
+/* Layout: coluna única de 480px, cartões suaves sobre creme, secção verde do itinerário, bloco terracota do presente. */
+:root{
+  --cream:#f8f3f1; --paper:#fcf9f8; --page:#e8e4e1;
+  --green:#4f7a49; --green-d:#3f6440; --green-t:#476a4b; --green-l:#e4ebdf;
+  --terra:#b8704f; --terra-d:#a05a3d; --terra-l:#c98a69;
+  --ink:#2e2e2c; --muted:#8b8a84; --line:#cfcbc6;
+  --c-caramelo:#d89a79; --c-castanho:#8a3a14; --c-khaki:#bdb35a; --c-cinzento:#77757b;
+  --serif:"Times New Roman",Times,"Liberation Serif",serif;
+  --script:"Great Vibes","Snell Roundhand",cursive;
+  --sans:-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --shadow:0 10px 30px rgba(70,60,50,.10),0 2px 6px rgba(70,60,50,.06);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--serif);margin:0}
+.app{max-width:480px;margin:0 auto;background:var(--cream);min-height:100vh;position:relative;overflow:hidden}
+.pad{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p{margin:0}
+svg{display:block}
+.ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ico.fill{fill:currentColor;stroke:none}
+
+/* ---------- Capa ---------- */
+#cover{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#8d9092,#a2a5a6 55%,#8b8e90);transition:opacity .9s ease,visibility .9s}
+#cover .bgp{position:absolute;inset:0;filter:blur(14px);opacity:.55;transform:scale(1.1)}
+#cover.gone{opacity:0;visibility:hidden}
+.cv{position:relative;width:100%;max-width:420px;text-align:center;color:#fff;padding:0 28px}
+.eyebrow{font-family:var(--sans);font-size:10px;letter-spacing:.38em;text-transform:uppercase}
+.cv .names{font-size:30px;margin:14px 0 18px;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+.cv .dt{font-size:13px;letter-spacing:.5em;margin-bottom:22px;opacity:.92}
+.hdiv{display:flex;align-items:center;justify-content:center;gap:12px;color:#fff;margin-bottom:26px}
+.hdiv i{display:block;width:46px;height:1px;background:currentColor;opacity:.6}
+.hdiv .ico{font-size:12px}
+.glass{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:20px 22px;
+  font-style:italic;font-size:13px;line-height:1.7;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.btn-open{margin-top:38px;border:0;cursor:pointer;background:var(--green);color:#f4f7f1;font-family:var(--sans);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:14px 34px;border-radius:999px;
+  box-shadow:0 10px 22px rgba(30,50,30,.35);transition:transform .2s,background .2s}
+.btn-open:hover{background:var(--green-d);transform:translateY(-1px)}
+.btn-open:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+#splash{position:fixed;inset:0;z-index:60;background:var(--cream);display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s;color:var(--green)}
+#splash.on{opacity:1;visibility:visible}
+#splash .ico{font-size:26px;animation:beat 1s ease-in-out infinite}
+#splash small{font-family:var(--script);font-size:20px;color:var(--muted)}
+@keyframes beat{50%{transform:scale(1.25)}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:min(92vh,760px);min-height:560px;overflow:hidden;background:linear-gradient(180deg,#9aa0a3,#b8bcbe 60%,#c9cccd)}
+.hero .ph{position:absolute;inset:0}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(248,243,241,0),var(--cream) 94%)}
+.hero .txt{position:absolute;left:0;right:0;bottom:84px;z-index:2;text-align:center;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.hero .names{font-size:30px;margin:12px 0 10px}
+.hero .when{font-size:14px;letter-spacing:.06em}
+.hero .scroll{position:absolute;bottom:26px;left:0;right:0;z-index:2;text-align:center;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+.hero .scroll b{display:block;margin:6px auto 0;width:1px;height:22px;background:var(--muted);animation:drop 1.6s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Secções ---------- */
+section{padding-top:56px;padding-bottom:12px}
+.sh{text-align:center}
+.sh .mark{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--green);margin-bottom:16px}
+.sh .mark i{flex:1;max-width:80px;height:1px;background:var(--line)}
+.sh .mark .ring{width:54px;height:54px;border-radius:50%;border:1.5px solid var(--green);background:var(--green-l);
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.sh .mark .ring.sm{width:auto;height:auto;border:0;background:none;font-size:18px}
+.sh h2{font-size:26px;font-weight:400;color:var(--green-t);line-height:1.25}
+.sh .sub{font-family:var(--sans);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.sh .lead{font-size:14.5px;line-height:1.6;margin-top:12px;color:#4a4a47}
+.sh .rule{width:44px;height:1px;background:var(--ink);opacity:.55;margin:16px auto 0}
+
+.photo-card{margin-top:28px;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(180deg,#b9bdc0,#d7d9da);aspect-ratio:3/4;position:relative}
+.photo-card .ph{position:absolute;inset:0}
+.cap{font-family:var(--script);font-size:22px;color:var(--green);text-align:center;margin-top:16px}
+
+.fam{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:28px}
+.person{width:100%;background:var(--paper);border-radius:24px;padding:28px 20px 26px;text-align:center;box-shadow:var(--shadow)}
+.mono{width:54px;height:54px;margin:0 auto 14px;border:1.5px solid var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--script);font-size:30px;color:var(--green);line-height:1}
+.person .nm{font-family:var(--script);font-size:30px;color:var(--green-t);line-height:1.1}
+.person .r{width:40px;height:1px;background:var(--ink);opacity:.5;margin:10px auto 14px}
+.person .lab{font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--muted)}
+.person .par{margin-top:12px;font-size:15px;line-height:1.7}
+.person .par em{font-size:12px;opacity:.75}
+.hbub{width:58px;height:58px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:22px}
+
+/* ---------- Itinerário ---------- */
+.itin{position:relative;background:linear-gradient(170deg,#5a8352,#4a7346);color:#f1f5ee;border-radius:28px;padding:34px 22px 34px;box-shadow:0 18px 40px rgba(50,80,45,.32);text-align:center;margin-top:12px}
+.itin .leaf{position:absolute;left:16px;top:16px;font-size:20px;opacity:.5}
+.itin .leaf.b{left:auto;right:16px;top:auto;bottom:16px}
+.itin h2{font-size:24px;font-weight:400}
+.itin .rule{width:60px;height:1px;background:#fff;opacity:.4;margin:10px auto 24px}
+.pin{width:48px;height:48px;border:1px solid rgba(255,255,255,.6);border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(255,255,255,.08)}
+.itin .place{font-size:19px}
+.itin .addr{font-size:13px;margin-top:4px;opacity:.9}
+.itin .tag{font-family:var(--sans);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;margin-top:10px;opacity:.8;line-height:1.6}
+.itin hr{border:0;height:1px;background:rgba(255,255,255,.28);width:54px;margin:22px auto}
+.line{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;margin:10px 0}
+.line .ico{font-size:15px;opacity:.9}
+.dress{margin-top:26px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:20px 18px;backdrop-filter:blur(2px)}
+.dress .t{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.dress .v{font-size:17px;margin:10px 0 4px}
+.dress .n{font-size:12.5px;opacity:.9}
+.dress .e{font-size:11.5px;font-style:italic;opacity:.65;margin-top:8px}
+.dress hr{margin:16px 0 14px}
+.sw{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px;max-width:230px;margin:16px auto 0}
+.sw div{font-size:11px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.sw b{display:block;width:56px;height:56px;border-radius:14px;box-shadow:0 6px 14px rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,.12)}
+.btn-white{display:inline-flex;align-items:center;gap:8px;margin-top:26px;background:#fff;color:#333;text-decoration:none;
+  font-family:var(--sans);font-size:13px;padding:12px 24px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,.2)}
+.btn-white .ico{font-size:14px;color:#666}
+
+/* ---------- Foto decorativa em tons de cinza ---------- */
+.fadeimg{position:relative;height:230px;margin-top:40px;overflow:hidden;filter:grayscale(1)}
+.fadeimg .ph{position:absolute;inset:0}
+.fadeimg::before,.fadeimg::after{content:"";position:absolute;left:0;right:0;height:40%;z-index:2}
+.fadeimg::before{top:0;background:linear-gradient(var(--cream),rgba(248,243,241,0))}
+.fadeimg::after{bottom:0;background:linear-gradient(rgba(248,243,241,0),var(--cream))}
+
+/* ---------- RSVP ---------- */
+.form{margin-top:30px;background:var(--paper);border-radius:24px;padding:26px 20px;box-shadow:var(--shadow)}
+.fld{margin-bottom:20px}
+.fld label.l{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;margin-bottom:9px;color:#3b3b39}
+.fld label.l .ico{font-size:14px;color:var(--muted)}
+.inp{width:100%;border:1.5px solid #d8d3ce;background:var(--cream);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);transition:border .2s,box-shadow .2s}
+.inp::placeholder{color:#b1aea8;font-style:italic}
+.inp:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px rgba(79,122,73,.15)}
+textarea.inp{min-height:110px;resize:vertical}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid transparent;background:#efebe7;border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.4;transition:all .2s}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .dot{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid #b9b5ae;background:#fff;display:flex;align-items:center;justify-content:center}
+.opt.sel{border-color:var(--green);background:#e9efe5}
+.opt.sel .dot{border-color:var(--green)}
+.opt.sel .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.opt:has(input:focus-visible){outline:2px solid var(--green);outline-offset:2px}
+.btn-green{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;background:var(--green);color:#f4f7f1;font:inherit;font-family:var(--sans);font-size:14px;padding:15px;border-radius:12px;box-shadow:0 10px 20px rgba(60,90,55,.3);transition:background .2s,transform .2s}
+.btn-green:hover{background:var(--green-d)}
+.note{font-size:11px;color:var(--muted);margin-top:14px;text-align:center;font-family:var(--sans)}
+.err{color:#a3402a;font-size:12px;font-family:var(--sans);margin-top:6px;min-height:1em}
+.thanks{margin-top:30px;background:var(--paper);border-radius:24px;padding:34px 22px;box-shadow:var(--shadow);text-align:center}
+.thanks .ring{width:62px;height:62px;border-radius:50%;background:var(--green-l);border:1.5px solid var(--green);color:var(--green);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.thanks h3{font-size:26px;font-weight:400;color:var(--green-t)}
+.thanks p{margin-top:12px;font-size:15px;line-height:1.6}
+.thanks .sig{font-family:var(--script);font-size:24px;color:var(--green);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px}
+.thanks .sig .ico{font-size:16px;color:var(--terra)}
+
+/* ---------- Mensagens ---------- */
+.msgs{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+.msg{background:var(--paper);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow)}
+.msg .who{display:flex;align-items:center;gap:12px;font-size:14px;color:#6f6f6a}
+.av{flex:none;width:36px;height:36px;border-radius:50%;background:#6b8f68;color:#eef3ea;font-family:var(--sans);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.msg q{display:block;quotes:none;margin-top:12px;font-style:italic;font-size:14px;line-height:1.6;word-break:break-word}
+.more{display:flex;margin:22px auto 0;align-items:center;gap:8px;border:0;cursor:pointer;background:var(--green);color:#f4f7f1;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border-radius:999px;box-shadow:0 8px 18px rgba(60,90,55,.3)}
+.more .ico{font-size:12px}
+.leave{margin-top:26px;background:var(--paper);border-radius:18px;padding:26px 20px;text-align:center;box-shadow:var(--shadow)}
+.leave .ico{font-size:30px;color:var(--terra)}
+.leave h3{font-size:19px;font-weight:400;margin-top:10px;color:var(--green-t)}
+.leave p{font-size:12.5px;line-height:1.6;margin-top:10px;color:#55554f}
+
+/* ---------- Contagem ---------- */
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+.cd div{background:var(--paper);border-radius:14px;padding:16px 4px 12px;text-align:center;box-shadow:var(--shadow)}
+.cd b{display:block;font-size:26px;font-weight:700;color:var(--green-t);font-variant-numeric:tabular-nums}
+.cd span{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.14em;color:var(--terra-d);margin-top:6px}
+.cd div::after{content:"";display:block;width:16px;height:1px;background:var(--line);margin:8px auto 0}
+.when2{margin-top:26px;text-align:center;color:var(--green-t);font-size:17px}
+.when2 small{display:block;font-size:14px;color:#6c6c66;margin-top:8px}
+.done{margin-top:24px;background:var(--paper);border-radius:20px;padding:26px 20px;text-align:center;box-shadow:var(--shadow)}
+.done .ring{width:46px;height:46px;border-radius:50%;background:var(--green);color:#fff;margin:-48px auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow)}
+.done h3{font-size:22px;font-weight:400;color:var(--green-t)}
+.done p{font-size:14.5px;line-height:1.6;margin-top:10px}
+
+/* ---------- Presente ---------- */
+.gift{margin-top:28px;background:var(--paper);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.gift .intro{padding:20px 22px;text-align:center;font-size:14.5px;line-height:1.65}
+.mon{margin:6px 14px 0;border-radius:20px;overflow:hidden;background:var(--paper);box-shadow:0 14px 34px rgba(150,90,60,.25);margin-bottom:26px}
+.mon .hd{background:linear-gradient(160deg,var(--terra-l),var(--terra-d));color:#fff;text-align:center;padding:26px 16px 22px}
+.mon .hd .ring{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.22);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.mon .hd h3{font-size:22px;font-weight:400}
+.mon .hd small{display:block;font-size:12.5px;font-style:italic;opacity:.85;margin-top:6px}
+.mon .bd{padding:22px 18px 22px;text-align:center;font-size:15px;line-height:1.65}
+.btn-terra{width:100%;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:12px;border:0;cursor:pointer;background:linear-gradient(160deg,var(--terra-l),var(--terra-d));color:#fff;font:inherit;font-size:15px;padding:14px;border-radius:10px;box-shadow:0 10px 20px rgba(150,90,60,.35)}
+.btn-terra .ico{font-size:16px}
+.mon .q{font-size:12px;font-style:italic;color:#6c6c66;margin-top:16px;line-height:1.6}
+
+/* modal */
+#modal{position:fixed;inset:0;z-index:70;background:rgba(40,36,32,.55);display:none;align-items:flex-end;justify-content:center;padding:14px;backdrop-filter:blur(3px)}
+#modal.on{display:flex}
+.sheet{width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;background:var(--paper);border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35);animation:up .35s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet .hd{position:relative;background:linear-gradient(160deg,var(--terra-l),var(--terra-d));color:#fff;text-align:center;padding:26px 16px 20px}
+.sheet .hd .ring{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.22);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:19px}
+.sheet .hd h3{font-size:21px;font-weight:400}
+.sheet .hd small{font-size:12px;font-style:italic;opacity:.85}
+.x{position:absolute;right:14px;top:14px;border:0;background:none;color:#fff;font-size:20px;cursor:pointer;padding:4px}
+.sheet .bd{overflow:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.acc{border:1.5px solid #ddd7d0;border-radius:16px;padding:14px;background:#f4f0ec}
+.acc .top{display:flex;align-items:center;gap:12px}
+.acc .top .ic{width:34px;height:34px;border-radius:50%;background:var(--green-l);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:16px}
+.acc .top b{font-family:var(--sans);font-size:14px;display:block}
+.acc .top span{font-size:12px;color:#6c6c66;display:block}
+.row{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#e6e1d6;border-radius:10px;padding:10px 12px}
+.row small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.12em;color:#7a776e}
+.row code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:14px;letter-spacing:.04em;word-break:break-all}
+.cp{flex:none;width:32px;height:32px;border-radius:8px;border:0;background:transparent;color:#6c6c66;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px}
+.cp.ok{background:#cfd6c9;color:var(--green)}
+.thx{background:#eaeee5;border-radius:12px;text-align:center;font-size:13px;padding:14px;color:#4a4a47}
+.thx .ico{font-size:16px;color:var(--green);margin:0 auto 6px}
+.btn-close{border:0;cursor:pointer;background:linear-gradient(160deg,var(--terra-l),var(--terra-d));color:#fff;font:inherit;font-family:var(--sans);font-size:14px;padding:14px;border-radius:10px}
+
+/* ---------- Rodapé ---------- */
+footer{padding-top:60px;padding-bottom:100px;text-align:center}
+.fmark{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--green)}
+.fmark .ring{width:54px;height:54px;border-radius:50%;border:1.5px solid var(--green);background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:22px}
+.fmark .ico{font-size:18px;opacity:.7}
+footer .fn{font-family:var(--script);font-size:32px;color:var(--green-t);margin-top:14px}
+footer .fd{font-size:15px;margin-top:2px}
+.verse{margin:26px 0;background:var(--paper);border-radius:18px;padding:22px 18px;box-shadow:var(--shadow)}
+.verse q{display:block;quotes:none;font-style:italic;font-size:18px;line-height:1.5}
+.verse span{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:#6c6c66;margin-top:12px}
+.dots{display:flex;align-items:center;justify-content:center;gap:10px;margin:28px 0 22px}
+.dots i{width:36px;height:1px;background:var(--line)}
+.dots b{width:6px;height:6px;border-radius:50%;background:#aaa}
+.hash{font-family:var(--script);font-size:24px;color:var(--muted)}
+.fnote{font-size:12.5px;color:#7d7c76;margin-top:6px}
+.sep{height:1px;background:var(--line);margin:26px 0 18px}
+.made{font-size:13px;color:#666;display:flex;align-items:center;justify-content:center;gap:6px}
+.made .ico{color:var(--terra);font-size:13px}
+.copy{font-size:11px;color:#9b9a94;margin-top:6px}
+
+/* ---------- Botão de música ---------- */
+#music{position:fixed;z-index:40;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:max(18px,calc((100vw - 480px)/2 + 18px));width:50px;height:50px;border-radius:50%;border:0;cursor:pointer;background:var(--green);color:#fff;
+  box-shadow:0 10px 22px rgba(40,70,40,.4);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding-bottom:15px}
+#music i{display:block;width:3.5px;height:8px;background:#fff;border-radius:2px;opacity:.9}
+#music.on i{animation:eq 0.9s ease-in-out infinite}
+#music.on i:nth-child(2){animation-delay:.2s}#music.on i:nth-child(3){animation-delay:.45s}#music.on i:nth-child(4){animation-delay:.1s}
+@keyframes eq{50%{height:20px}}
+#music.off::after{content:"";position:absolute;left:12px;right:12px;top:50%;height:2px;background:#fff;transform:rotate(-40deg);border-radius:2px}
+
+/* silhueta placeholder */
+.ph svg{width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<!-- Ícones -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.8 4.8 6.4 4.8c2.2 0 3.8 1.2 5.6 3.4 1.8-2.2 3.4-3.4 5.6-3.4 3.6 0 5.5 3.6 4 7C19.5 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15M5 19c3-5 6-8 11-11"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 1 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15.500 15.500 0 0 1 4.500 5.500a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.500h16v11H10l-4.500 3.500v-3.500H4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 3 10.500l7 3 3 7zM10 13.500 21 3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.500" y="9" width="17" height="11" rx="1.500"/><path d="M12 9v11M3.500 13h17M12 9C9 9 7 7.800 7 6.200 7 4.500 9.500 4.500 12 9c2.500-4.500 5-4.500 5-2.800C17 7.800 15 9 12 9z"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12.500" rx="2"/><path d="M3 10.500h18M6.500 15h3"/></symbol>
+  <symbol id="i-phone2" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.500" y="8.500" width="11" height="11" rx="2"/><path d="M15.500 8.500v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <!-- silhueta de casal (placeholder de foto) -->
+  <symbol id="couple" viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
+    <circle cx="112" cy="130" r="30" fill="rgba(255,255,255,.55)"/>
+    <path d="M52 400c0-70 24-118 60-118s60 48 60 118z" fill="rgba(255,255,255,.55)"/>
+    <circle cx="196" cy="150" r="30" fill="rgba(255,255,255,.7)"/>
+    <path d="M132 400c0-76 28-128 64-128s64 52 64 128z" fill="rgba(255,255,255,.7)"/>
+  </symbol>
+</svg>
+
+<div id="cover">
+  <div class="bgp ph"><svg><use href="#couple"/></svg></div>
+  <div class="cv">
+    <div class="eyebrow">Celebre conosco</div>
+    <h1 class="names" data-k="namesSerif"></h1>
+    <div class="dt" data-k="dateShort"></div>
+    <div class="hdiv"><i></i><svg class="ico fill"><use href="#i-heart"/></svg><i></i></div>
+    <div class="glass" data-k="coverQuote"></div>
+    <button class="btn-open" id="open" type="button">Abrir convite</button>
+  </div>
+</div>
+<div id="splash"><svg class="ico fill"><use href="#i-heart"/></svg><small>Abrindo convite...</small></div>
+
+<main class="app" id="app">
+  <!-- Hero -->
+  <header class="hero">
+    <div class="ph" id="ph-hero"><svg><use href="#couple"/></svg></div>
+    <div class="txt pad">
+      <div class="eyebrow">O casamento de</div>
+      <h1 class="names" data-k="namesSerif"></h1>
+      <div class="when" data-k="dateLong"></div>
+    </div>
+    <div class="scroll">Deslize para baixo<b></b></div>
+  </header>
+
+  <!-- Os Noivos -->
+  <section class="pad">
+    <div class="sh">
+      <div class="mark"><i></i><span class="ring sm"><svg class="ico fill"><use href="#i-heart"/></svg></span><i></i></div>
+      <h2>Os Noivos</h2>
+      <div class="sub">Unidos pelo amor</div>
+    </div>
+    <div class="photo-card"><div class="ph" id="ph-card"><svg><use href="#couple"/></svg></div></div>
+    <div class="cap" data-k="namesScript"></div>
+
+    <div class="fam">
+      <article class="person">
+        <div class="mono" data-k="initA"></div>
+        <div class="nm" data-k="firstA"></div><div class="r"></div>
+        <div class="lab" data-k="filA"></div>
+        <div class="par" data-k="parA"></div>
+      </article>
+      <div class="hbub"><svg class="ico fill"><use href="#i-heart"/></svg></div>
+      <article class="person">
+        <div class="mono" data-k="initB"></div>
+        <div class="nm" data-k="firstB"></div><div class="r"></div>
+        <div class="lab" data-k="filB"></div>
+        <div class="par" data-k="parB"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Itinerário -->
+  <section class="pad">
+    <div class="itin">
+      <svg class="ico leaf"><use href="#i-leaf"/></svg>
+      <h2>Itinerário do Dia</h2><div class="rule"></div>
+      <div class="pin"><svg class="ico"><use href="#i-pin"/></svg></div>
+      <div class="place" data-k="place"></div>
+      <div class="addr" data-k="address"></div>
+      <div class="tag">Local da cerimónia &amp;<br>celebração</div>
+      <hr>
+      <div class="line"><svg class="ico"><use href="#i-cal"/></svg><span data-k="dateLong"></span></div>
+      <hr>
+      <div id="schedule"></div>
+      <div class="dress">
+        <div class="t">Dress code</div>
+        <div class="v" data-k="dress"></div>
+        <div class="n" data-k="dressNote"></div>
+        <div class="e" data-k="dressAvoid"></div>
+        <hr>
+        <div class="t">Paleta sugerida</div>
+        <div class="sw" id="palette"></div>
+      </div>
+      <a class="btn-white" id="how" href="#" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>Como Chegar</a>
+      <svg class="ico leaf b"><use href="#i-leaf"/></svg>
+    </div>
+  </section>
+
+  <div class="fadeimg"><div class="ph" id="ph-fade"><svg><use href="#couple"/></svg></div></div>
+
+  <!-- RSVP -->
+  <section class="pad" id="rsvp">
+    <div class="sh">
+      <div class="mark"><i></i><span class="ring"><svg class="ico"><use href="#i-cal"/></svg></span><i></i></div>
+      <h2>Confirme sua Presença</h2>
+      <p class="lead">Sua presença é o melhor presente que podemos receber!</p>
+      <div class="rule"></div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <div class="fld">
+        <label class="l" for="f-name"><svg class="ico"><use href="#i-user"/></svg>Nome Completo *</label>
+        <input class="inp" id="f-name" autocomplete="name" placeholder="Seu nome completo">
+      </div>
+      <div class="fld">
+        <label class="l" for="f-tel"><svg class="ico"><use href="#i-phone"/></svg>Telefone *</label>
+        <input class="inp" id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+258 XX XXX XXXX">
+      </div>
+      <div class="fld">
+        <div class="l" style="display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;margin-bottom:9px"><svg class="ico" style="width:14px;height:14px;color:var(--muted)"><use href="#i-heart"/></svg>Confirmação de Presença *</div>
+        <label class="opt sel"><input type="radio" name="att" value="sim" checked><span class="dot"></span><span>✨ Sim, estarei presente com alegria!</span></label>
+        <label class="opt"><input type="radio" name="att" value="nao"><span class="dot"></span><span>Infelizmente não poderei comparecer</span></label>
+      </div>
+      <div class="fld">
+        <label class="l" for="f-msg"><svg class="ico"><use href="#i-chat"/></svg>Mensagem para os Noivos (Opcional)</label>
+        <textarea class="inp" id="f-msg" placeholder="Deixe uma mensagem especial para os noivos..."></textarea>
+      </div>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn-green" type="submit"><svg class="ico" style="font-size:16px"><use href="#i-send"/></svg>Confirmar Presença</button>
+      <div class="note">* Campos obrigatórios · Suas informações estão seguras</div>
+    </form>
+    <div class="thanks" id="thanks" hidden>
+      <div class="ring"><svg class="ico"><use href="#i-check"/></svg></div>
+      <h3>Confirmação Enviada!</h3>
+      <p>Muito obrigado pela confirmação! Estamos ansiosos para celebrar este dia especial consigo.</p>
+      <div class="sig"><svg class="ico fill"><use href="#i-heart"/></svg><span data-k="namesScript"></span><svg class="ico fill"><use href="#i-heart"/></svg></div>
+    </div>
+  </section>
+
+  <div class="fadeimg" style="margin-top:34px"><div class="ph" id="ph-fade2"><svg><use href="#couple"/></svg></div></div>
+
+  <!-- Mensagens -->
+  <section class="pad">
+    <div class="sh">
+      <div class="mark"><i></i><span class="ring"><svg class="ico"><use href="#i-chat"/></svg></span><i></i></div>
+      <h2>Mensagens dos Convidados</h2>
+      <p class="lead">Palavras de carinho e amor dos nossos familiares e amigos</p>
+      <div class="rule"></div>
+    </div>
+    <div class="msgs" id="msgs"></div>
+    <button class="more" id="more" type="button"><span>Ver mais mensagens</span><svg class="ico"><use href="#i-down"/></svg></button>
+    <div class="leave">
+      <svg class="ico fill" style="margin:0 auto"><use href="#i-heart"/></svg>
+      <h3>Deixe sua mensagem</h3>
+      <p>Suas palavras são muito especiais para nós!<br>Deixe sua mensagem na secção de confirmação de presença.</p>
+    </div>
+  </section>
+
+  <div class="fadeimg" style="margin-top:34px"><div class="ph" id="ph-fade3"><svg><use href="#couple"/></svg></div></div>
+
+  <!-- Contagem -->
+  <section class="pad">
+    <div class="sh">
+      <div class="mark"><i></i><span class="ring"><svg class="ico"><use href="#i-clock"/></svg></span><i></i></div>
+      <h2>Contagem Regressiva</h2>
+      <p class="lead">É agora <svg class="ico fill" style="display:inline-block;color:#c0392b;font-size:14px;vertical-align:-2px"><use href="#i-heart"/></svg></p>
+      <div class="rule"></div>
+    </div>
+    <div class="when2"><span data-k="dateLong"></span><small data-k="timeShort"></small></div>
+    <div class="cd" id="cd">
+      <div><b id="cd-d">00</b><span>DIAS</span></div>
+      <div><b id="cd-h">00</b><span>HORAS</span></div>
+      <div><b id="cd-m">00</b><span>MIN</span></div>
+      <div><b id="cd-s">00</b><span>SEG</span></div>
+    </div>
+    <div class="done" id="done" hidden style="margin-top:56px">
+      <div class="ring"><svg class="ico fill"><use href="#i-heart"/></svg></div>
+      <h3>Finalmente Casados!</h3>
+      <p data-k="doneText"></p>
+    </div>
+  </section>
+
+  <div class="fadeimg" style="margin-top:34px"><div class="ph" id="ph-fade4"><svg><use href="#couple"/></svg></div></div>
+
+  <!-- Presente -->
+  <section class="pad">
+    <div class="sh">
+      <div class="mark"><i></i><span class="ring"><svg class="ico"><use href="#i-gift"/></svg></span><i></i></div>
+      <h2>Presente em Forma de Carinho</h2>
+    </div>
+    <div class="gift" style="margin-top:26px">
+      <div class="intro">Sua presença é o melhor presente! Mas se desejar nos presentear, preparamos algumas opções de transferência.</div>
+    </div>
+    <div class="mon" style="margin-top:22px">
+      <div class="hd">
+        <div class="ring"><svg class="ico fill"><use href="#i-heart"/></svg></div>
+        <h3>Presente Monetário</h3><small>Contribua para o nosso novo lar</small>
+      </div>
+      <div class="bd">
+        Se preferir, pode contribuir para nossa nova vida juntos através de transferência bancária ou carteira móvel.
+        <button class="btn-terra" id="giftBtn" type="button"><svg class="ico"><use href="#i-card"/></svg>Ver Dados para Transferência</button>
+        <div class="q">"O amor não se mede pelo que recebemos, mas pelo que damos"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="pad">
+    <div class="fmark"><svg class="ico"><use href="#i-leaf"/></svg><span class="ring"><svg class="ico fill"><use href="#i-heart"/></svg></span><svg class="ico" style="transform:scaleX(-1)"><use href="#i-leaf"/></svg></div>
+    <div class="fn" data-k="namesScript"></div>
+    <div class="fd" data-k="dateFooter"></div>
+    <div class="verse"><q data-k="verse"></q><span data-k="verseRef"></span></div>
+    <div class="dots"><i></i><b></b><i></i></div>
+    <div class="hash" data-k="hashtag"></div>
+    <div class="fnote">Partilhe os seus momentos connosco</div>
+    <div class="sep"></div>
+    <div class="made">Feito com <svg class="ico fill"><use href="#i-heart"/></svg> para celebrar o amor</div>
+    <div class="copy" data-k="copyright"></div>
+  </footer>
+</main>
+
+<button id="music" class="off" type="button" aria-label="Ligar ou desligar música"><i></i><i></i><i></i><i></i></button>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="sheet">
+    <div class="hd">
+      <button class="x" id="mx" type="button" aria-label="Fechar"><svg class="ico"><use href="#i-x"/></svg></button>
+      <div class="ring"><svg class="ico"><use href="#i-card"/></svg></div>
+      <h3 id="mt">Dados para Transferência</h3><small>Escolha a forma de pagamento</small>
+    </div>
+    <div class="bd" id="accs"></div>
+  </div>
+</div>
+
+<script>
+/* ===== PERSONALIZE AQUI: todos os textos do convite ===== */
+const CONFIG = {
+  firstA:"Ana", firstB:"Bruno",
+  filA:"FILHA DE", filB:"FILHO DE",
+  parA:["Maria Santos","Carlos Santos"], parB:["Teresa Costa","João Costa"],
+  date:"2027-03-06T13:30:00",
+  place:"Quinta Jardim", address:"Rua das Flores, 120",
+  mapsQuery:"Quinta Jardim",
+  schedule:[["13:30","Cerimónia Civil"],["14:30","Copo de Água"]],
+  dress:"Casual", dressNote:"Calçados confortáveis recomendados", dressAvoid:"Evitar branco e off-white",
+  palette:[["Caramelo","#d89a79"],["Castanho","#8a3a14"],["Khaki","#bdb35a"],["Cinzento","#77757b"]],
+  coverQuote:"Gostaríamos de compartilhar consigo um dos momentos mais especiais das nossas vidas",
+  doneText:"O grande dia chegou! Ana & Bruno unidos para sempre.",
+  verse:"O amor é paciente, o amor é bondoso...", verseRef:"1 CORÍNTIOS 13:4",
+  hashtag:"#AnaEBruno2027", copyright:"© 2027 · Quinta Jardim",
+  /* fotos: coloque o endereço de uma imagem para trocar a silhueta */
+  photos:{cover:"", hero:"", card:"", fade:""},
+  messages:[
+    ["Camila Duarte","Parabéns, sobrinhos!"],
+    ["Helena Marques","Que o vosso amor seja leve, verdadeiro e que sempre escolham o amor."],
+    ["Rui Pereira","É uma honra testemunhar o enlace. Desejo muitas felicidades e bênçãos no vosso lar."],
+    ["Sofia Lemos","Assim, já não são dois, mas uma só carne. Portanto, o que Deus uniu ninguém separe."],
+    ["Elisa Monteiro","Que Deus seja o guia dessa vossa nova jornada."]
+  ],
+  accounts:[
+    {icon:"card", bank:"Banco Exemplo", owner:"ANA MARIA SANTOS", rows:[["CONTA","000 111 222 333"],["NIB","0001 0000 0000 1112 2233 3"]]},
+    {icon:"phone2", bank:"Carteira Móvel A", owner:"Ana Santos", rows:[["NÚMERO","84 000 0000"]]},
+    {icon:"phone2", bank:"Carteira Móvel B", owner:"Bruno Costa", rows:[["NÚMERO","+258 85 000 0000"]]}
+  ]
+};
+
+/* ===== lógica ===== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const C=CONFIG, d=new Date(C.date);
+const MES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const DIA=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+const p2=n=>String(n).padStart(2,"0");
+const T={
+  namesSerif:C.firstA+" & "+C.firstB, namesScript:C.firstA+" & "+C.firstB,
+  dateShort:`${p2(d.getDate())} · ${p2(d.getMonth()+1)} · ${d.getFullYear()}`,
+  dateLong:`${DIA[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]} de ${d.getFullYear()}`,
+  dateFooter:`${d.getDate()} de ${MES[d.getMonth()]} de ${d.getFullYear()}`,
+  timeShort:`${p2(d.getHours())}:${p2(d.getMinutes())}h`,
+  initA:C.firstA[0], initB:C.firstB[0], firstA:C.firstA, firstB:C.firstB, filA:C.filA, filB:C.filB,
+  place:C.place,address:C.address,dress:C.dress,dressNote:C.dressNote,dressAvoid:C.dressAvoid,
+  coverQuote:`"${C.coverQuote}"`,doneText:C.doneText,verse:`"${C.verse}"`,verseRef:C.verseRef,hashtag:C.hashtag,copyright:C.copyright
+};
+$$("[data-k]").forEach(el=>{const k=el.dataset.k;
+  if(k==="parA"||k==="parB"){el.innerHTML=C[k][0]+"<br>&amp;<br>"+C[k][1];}
+  else if(k==="namesSerif"&&el.tagName!=="H1"){el.textContent=T[k]}
+  else el.textContent=T[k];
+});
+$$(".cv .names, .hero .names").forEach(e=>e.style.fontFamily="var(--serif)");
+$("#how").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(C.mapsQuery);
+$("#schedule").innerHTML=C.schedule.map(([h,t])=>`<div class="line"><svg class="ico"><use href="#i-clock"/></svg><span><b>${h}</b> · ${t}</span></div>`).join("");
+$("#palette").innerHTML=C.palette.map(([n,c])=>`<div><b style="background:${c}"></b>${n}</div>`).join("");
+/* fotos opcionais */
+const set=(id,u)=>{if(u){const e=$(id);e.innerHTML="";e.style.cssText+=`background:url("${u}") center/cover`}};
+set("#ph-hero",C.photos.hero);set("#ph-card",C.photos.card);
+["#ph-fade","#ph-fade2","#ph-fade3","#ph-fade4"].forEach(i=>set(i,C.photos.fade));
+if(C.photos.cover){const e=$("#cover .bgp");e.innerHTML="";e.style.background=`url("${C.photos.cover}") center/cover`}
+
+/* abrir convite */
+$("#open").onclick=()=>{
+  $("#splash").classList.add("on");
+  setTimeout(()=>{$("#cover").classList.add("gone");window.scrollTo(0,0)},700);
+  setTimeout(()=>$("#splash").classList.remove("on"),1900);
+  startMusic(true);
+};
+
+/* contagem regressiva */
+function tick(){
+  const ms=d-Date.now();
+  if(ms<=0){["d","h","m","s"].forEach(k=>$("#cd-"+k).textContent="00");$("#done").hidden=false;return}
+  const s=Math.floor(ms/1000);
+  $("#cd-d").textContent=p2(Math.floor(s/86400));$("#cd-h").textContent=p2(Math.floor(s%86400/3600));
+  $("#cd-m").textContent=p2(Math.floor(s%3600/60));$("#cd-s").textContent=p2(s%60);
+}
+tick();setInterval(tick,1000);
+
+/* mensagens */
+let store=[];try{store=JSON.parse(localStorage.getItem("convite-msgs")||"[]")}catch(e){}
+let all=[...store,...C.messages], shown=3;
+const ini=n=>n.split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function renderMsgs(){
+  $("#msgs").innerHTML=all.slice(0,shown).map(([n,m])=>`<article class="msg"><div class="who"><span class="av">${esc(ini(n))}</span><span>${esc(n)}</span></div><q>"${esc(m)}"</q></article>`).join("");
+  $("#more").style.display=all.length>shown?"flex":"none";
+}
+$("#more").onclick=()=>{shown+=3;renderMsgs()};
+renderMsgs();
+
+/* RSVP */
+$$(".opt input").forEach(r=>r.addEventListener("change",()=>$$(".opt").forEach(o=>o.classList.toggle("sel",o.querySelector("input").checked))));
+$("#form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=$("#f-name").value.trim(),t=$("#f-tel").value.trim(),m=$("#f-msg").value.trim(),a=$('input[name=att]:checked').value;
+  const er=$("#err");
+  if(n.length<3){er.textContent="Escreva o seu nome completo.";$("#f-name").focus();return}
+  if(t.replace(/\D/g,"").length<7){er.textContent="Indique um telefone válido.";$("#f-tel").focus();return}
+  er.textContent="";
+  try{
+    const list=JSON.parse(localStorage.getItem("convite-rsvp")||"[]");list.push({n,t,a,m,at:Date.now()});localStorage.setItem("convite-rsvp",JSON.stringify(list));
+    if(m){store.unshift([n,m]);localStorage.setItem("convite-msgs",JSON.stringify(store));all=[...store,...C.messages];renderMsgs()}
+  }catch(x){ if(m){all.unshift([n,m]);renderMsgs()} }
+  $("#form").hidden=true;$("#thanks").hidden=false;$("#thanks").scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+/* presente / modal */
+const ICON={card:"#i-card",phone2:"#i-phone2"};
+$("#accs").innerHTML=C.accounts.map(a=>`<div class="acc"><div class="top"><span class="ic"><svg class="ico"><use href="${ICON[a.icon]}"/></svg></span><div><b>${esc(a.bank)}</b><span>${esc(a.owner)}</span></div></div>`+
+  a.rows.map(([l,v])=>`<div class="row"><div><small>${l}</small><code>${esc(v)}</code></div><button class="cp" type="button" data-v="${esc(v)}" aria-label="Copiar ${l}"><svg class="ico"><use href="#i-copy"/></svg></button></div>`).join("")+`</div>`).join("")+
+  `<div class="thx"><svg class="ico fill"><use href="#i-heart"/></svg>Muito obrigado pelo carinho!</div><button class="btn-close" id="mc" type="button">Fechar</button>`;
+const modal=$("#modal"),closeM=()=>modal.classList.remove("on");
+$("#giftBtn").onclick=()=>{modal.classList.add("on");$("#mx").focus()};
+$("#mx").onclick=closeM;$("#mc").onclick=closeM;
+modal.addEventListener("click",e=>{if(e.target===modal)closeM()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM()});
+$("#accs").addEventListener("click",e=>{
+  const b=e.target.closest(".cp");if(!b)return;
+  const v=b.dataset.v,ok=()=>{b.classList.add("ok");b.innerHTML='<svg class="ico"><use href="#i-check"/></svg>';setTimeout(()=>{b.classList.remove("ok");b.innerHTML='<svg class="ico"><use href="#i-copy"/></svg>'},1600)};
+  const fb=()=>{const t=document.createElement("textarea");t.value=v;document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(x){}t.remove();ok()};
+  (navigator.clipboard?navigator.clipboard.writeText(v).then(ok,fb):fb());
+});
+
+/* música ambiente (gerada no navegador) */
+let ac,timer,playing=false;
+const NOTES=[261.63,329.63,392,523.25,392,329.63,293.66,349.23,440,587.33,440,349.23];
+function startMusic(on){
+  const b=$("#music");
+  if(on===false||playing&&on===undefined){playing=false;clearInterval(timer);b.classList.remove("on");b.classList.add("off");return}
+  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume&&ac.resume()}catch(e){return}
+  playing=true;b.classList.add("on");b.classList.remove("off");let i=0;
+  const play=()=>{const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();
+    o.type="sine";o.frequency.value=NOTES[i++%NOTES.length];g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+.05);g.gain.exponentialRampToValueAtTime(.0001,t+1.6);
+    o.connect(g).connect(ac.destination);o.start(t);o.stop(t+1.7)};
+  play();timer=setInterval(play,700);
+}
+$("#music").onclick=()=>startMusic();
+</script>
